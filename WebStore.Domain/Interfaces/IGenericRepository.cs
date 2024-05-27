@@ -26,11 +26,11 @@ public interface IGenericRepository<TEntity> where TEntity : class {
     /// Updates an existing entity of type TEntity in the repository.
     /// </summary>
     /// <param name="entity">The entity to update.</param>
-    void Update(int id, TEntity entity);
+    void Update(TEntity entity);
 
     /// <summary>
     /// Deletes an entity of type TEntity from the repository.
     /// </summary>
     /// <param name="entity">The entity to delete.</param>
-    void Delete(int id);
+    void Delete(TEntity entity);
 }
