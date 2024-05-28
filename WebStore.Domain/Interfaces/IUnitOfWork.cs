@@ -10,5 +10,5 @@ public interface IUnitOfWork<TEntity> : IDisposable{
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     // Repositories
-    IGenericRepository<User> UserRepository { get; }
+    IUserRepository Users{ get; }
 }
