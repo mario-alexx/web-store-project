@@ -25,6 +25,7 @@ public class UserRepository : GenericRepository<User>, IUserRepository
     /// <inheritdoc />
     public async Task<User> GetUserByIdAsync(int userId)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        return await _context.Users.FindAsync(userId);
+        //return await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
     }
 }
