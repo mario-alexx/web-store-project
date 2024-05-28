@@ -20,7 +20,7 @@ public class ApplicationDbContext : DbContext{
     }
 
     // DbSet's 
-    DbSet<User> Users = null!;
+    public DbSet<User> Users { get; set; }
 
     /// <summary>
     /// This method is called when the model for a context is being created. 

@@ -4,7 +4,7 @@
 public class UnitOfWork<TEntity> : IUnitOfWork<TEntity> where TEntity : class
 {
     private readonly ApplicationDbContext _context;
-    private IGenericRepository<User> _UserRepository;
+    private IUserRepository _userRepository;
     
     /// <summary>
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
@@ -16,12 +16,12 @@ public class UnitOfWork<TEntity> : IUnitOfWork<TEntity> where TEntity : class
     }
 
     /// <inheritdoc />
-    public IGenericRepository<User> UserRepository => _UserRepository ??= new GenericRepository<User>(_context);
+    public IUserRepository Users => _userRepository ??= new UserRepository(_context);
 
     /// <inheritdoc />
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.SaveChangesAsync();
+        return await _context.SaveChangesAsync(cancellationToken);
     }
 
     /// <inheritdoc />
