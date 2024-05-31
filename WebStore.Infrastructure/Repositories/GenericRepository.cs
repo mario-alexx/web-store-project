@@ -1,13 +1,12 @@
-
 using Microsoft.EntityFrameworkCore;
 
-  /// <summary>
+/// <summary>
 /// Represents a generic repository implementation for entities of type TEntity.
 /// </summary>
 /// <typeparam name="TEntity">The type of entities managed by the repository.</typeparam>
 public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
 {
-    private readonly ApplicationDbContext _context;
+    protected readonly ApplicationDbContext _context;
     private readonly DbSet<TEntity> _dbSet;
 
     /// <summary>
@@ -19,7 +18,6 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         _context = context;
         _dbSet = _context.Set<TEntity>();
     }
-
 
     /// <summary>
     /// Asynchronously retrieves all entities of type TEntity.

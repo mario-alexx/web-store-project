@@ -1,7 +1,7 @@
 /// <summary>
 /// Unit of Work implementation for coordinating changes across multiple repositories.
 /// </summary>
-public class UnitOfWork<TEntity> : IUnitOfWork<TEntity> where TEntity : class
+public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
     private IUserRepository _userRepository;

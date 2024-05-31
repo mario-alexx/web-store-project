@@ -17,15 +17,20 @@ public class UserRepository : GenericRepository<User>, IUserRepository
     }
 
     /// <inheritdoc />
+    public async Task<bool> EmailExistAsync(string email)
+    {
+        return await _context.Users.AnyAsync(u => u.Email == email);
+    }
+
+    /// <inheritdoc />
     public async Task<User> GetUserByEmailAsync(string email)
     {
         return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
     }
     
     /// <inheritdoc />
-    public async Task<User> GetUserByIdAsync(int userId)
+    public async Task<User> GetUserByIdAsync(int Id)
     {
-        return await _context.Users.FindAsync(userId);
-        //return await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        return await _context.Users.FindAsync(Id);
     }
 }
