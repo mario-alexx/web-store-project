@@ -14,9 +14,8 @@ public class ApplicationDbContext : DbContext{
     /// </summary>
     /// <param name="options">The options for configuring the context.</param>
     /// <param name="logger">Instance of ILogger to log information.</param>
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILogger logger) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
-        _logger = logger;
     }
 
     // DbSet's 
@@ -34,6 +33,18 @@ public class ApplicationDbContext : DbContext{
         modelBuilder.Entity<User>()
             .Property(u => u.Role)
             .HasConversion<string>();
+        modelBuilder.Entity<User>(entity => {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.UserName).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Password).IsRequired();
+            entity.Property(e => e.FirstName).HasMaxLength(100);
+            entity.Property(e => e.LastName).HasMaxLength(100);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(15);
+            entity.Property(e => e.Role).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+        });
     }
 
         /// <summary>
@@ -46,15 +57,11 @@ public class ApplicationDbContext : DbContext{
             {
                 AddAuditoryAttributes();
                 var response = base.SaveChanges();
-                _logger.LogInformation($"Changes successfully saved to the database: {response}");
-
                 return response;
             }
             catch (Exception ex)
             {
-                this.ChangeTracker.Clear();
-                _logger.LogWarning($"Something went wrong: {ex}");
-                
+                this.ChangeTracker.Clear();                
                 throw ex;
             }
         }
@@ -79,7 +86,6 @@ public class ApplicationDbContext : DbContext{
             // Checks if the entity is derived from BaseEntity.
             if (entity is BaseEntity)
             {
-
                 var track = entity as BaseEntity;
                 track.CreatedAt = DateTime.Now;
                 track.Status = true;
