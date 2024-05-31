@@ -1,19 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 /// <summary>
 /// Represents the database context for the application.
 /// </summary>
 public class ApplicationDbContext : DbContext{
 
-    private readonly ILogger _logger;
-
     /// <summary>
     /// Database context for the application, used to interact with the database.
     /// Inherits from DbContext, an Entity Framework Core class that facilitates mapping between objects and database records data.
     /// </summary>
     /// <param name="options">The options for configuring the context.</param>
-    /// <param name="logger">Instance of ILogger to log information.</param>
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }

@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase {
 
-    private readonly IUserService _userService;
+    private readonly IAuthService _authService;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthController"/> class.
     /// </summary>
-    /// <param name="userService">User service instance.</param>
-    public AuthController(IUserService userService)
+    /// <param name="authService">Auth service instance.</param>
+    public AuthController(IAuthService authService)
     {
-        _userService = userService;
+        _authService = authService;
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public class AuthController : ControllerBase {
     [Authorize(Roles = "User")]
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterModel registerModel) {
-        var result = await _userService.RegisterAsync(registerModel);
+        var result = await _authService.RegisterAsync(registerModel);
 
         if(!result.Success){
             return BadRequest(new ApiResponse<object>(null, new List<string> { result.ErrorMessage} ));
@@ -42,7 +42,7 @@ public class AuthController : ControllerBase {
     /// <param name="loginModel">Login data transfer object.</param>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel loginModel){
-        var result = await _userService.LoginAsync(loginModel);
+        var result = await _authService.LoginAsync(loginModel);
 
         if(!result.Success) {
            return Unauthorized(new ApiResponse<object>(null, new List<string> { result.ErrorMessage })); 
