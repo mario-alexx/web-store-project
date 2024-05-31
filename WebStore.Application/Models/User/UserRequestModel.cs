@@ -8,4 +8,4 @@
 /// <param name="Password">The user's password</param>
 /// <param name="PhoneNumber">The user's phone number</param>
 /// <param name="UserRole">The user's role. Defaults to <see cref="UserRole.User"/>.</param>
-public record class UserRequestModel(string UserName, string FirstName, string LastName, string Email, string Password, int PhoneNumber, UserRole UserRole = UserRole.User);
+public record class UserRequestModel(string UserName, string? FirstName, string? LastName, string Email, string Password, string? PhoneNumber, UserRole UserRole = UserRole.User);
