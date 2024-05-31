@@ -1,7 +1,7 @@
 /// <summary>
 /// Unit of Work interface for coordinating changes across multiple repositories.
 /// </summary>
-public interface IUnitOfWork<TEntity> : IDisposable{
+public interface IUnitOfWork : IDisposable{
     /// <summary>
     /// Saves all changes made in this context to the database.
     /// </summary>
