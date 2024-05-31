@@ -10,7 +10,7 @@ public static class ApplicationServiceExtension {
     /// <param name="services">The IServiceCollection to add services to.</param>
     public static void AddApplicationService(this IServiceCollection services) {
 
-        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITokenService, TokenService>();
 
         //AutoMapper register

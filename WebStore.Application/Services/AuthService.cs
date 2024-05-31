@@ -4,7 +4,7 @@ using XSystem.Security.Cryptography;
 /// <summary>
 /// Service implementation for user-related operations such as registration, login, and profile update.
 /// </summary>
-public class UserService : IUserService
+public class AuthService : IAuthService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -16,7 +16,7 @@ public class UserService : IUserService
     /// <param name="unitOfWork">Unit of Work.</param>
     /// <param name="mapper">AutoMapper instance.</param>
     /// <param name="tokenService">Token service instance.</param>
-    public UserService(IUnitOfWork unitOfWork, IMapper mapper, ITokenService tokenService)
+    public AuthService(IUnitOfWork unitOfWork, IMapper mapper, ITokenService tokenService)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -54,12 +54,6 @@ public class UserService : IUserService
 
         var registeredUserModel = _mapper.Map<RegisterModel>(user);
         return OperationResult<RegisterModel>.SuccessResult(registeredUserModel);
-    }
-
-    /// <inheritdoc />
-    public Task<OperationResult<UserRequestModel>> UpdateProfileAsync(UserRequestModel userRequestModel)
-    {
-        throw new NotImplementedException();
     }
 
     /// <summary>
